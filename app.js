@@ -1,28 +1,37 @@
+//Import da biblioteca de entrada de dados via teclado
 var readline = require('readline');
+
 var entradaDeDados = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 });
 
 entradaDeDados.question('Digite o primeiro número: ', function (numero1) {
-    entradaDeDados.question('Digite o segundo número: ', function (numero2) {
-        entradaDeDados.question('Digite a operação (+, -, *, /): ', function (operacao) {
-            var resultado;
+    let valor1 = numero1.replace(',','.');
 
-            if (operacao === "+") {
-                resultado = parseFloat(numero1) + parseFloat(numero2);
-            } else if (operacao === "-") {
-                resultado = parseFloat(numero1) - parseFloat(numero2);
-            } else if (operacao === "*") {
-                resultado = parseFloat(numero1) * parseFloat(numero2);
-            } else if (operacao === "/") {
-                resultado = parseFloat(numero1) / parseFloat(numero2);
-            } else {
-                resultado = "Operação inválida";
+    entradaDeDados.question('Digite o segundo numero: ', function (numero2){
+        let valor2 = numero2.replace(',','.')
+
+        valor1 = Number(valor1)
+        valor2 = Number(valor2)
+
+        entradaDeDados.question('Escolha uma opção de calculo: [SOMAR | SUBTRAIR | MULTIPLICAR | DIVIDIR]', function (opcao){
+            let operacao = opcao.toUpperCase()
+            let resultado
+
+
+            if(operacao == 'SOMAR'){
+                resultado = valor1 + valor2
+            }else if(operacao == 'SUBTRAIR'){
+                resultado = valor1 - valor2
+            }else if(operacao == 'MULTIPLICAR'){
+                 resultado = valor1 * valor2
+            }else if(operacao == 'DIVIDIR'){
+                resultado = valor1 / valor2
             }
 
-            console.log('Resultado: ' + resultado);
-            entradaDeDados.close();
-        });
-    });
-});
+            console.log(resultado)
+
+        })
+    })
+})
