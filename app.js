@@ -1,4 +1,4 @@
-//Import da biblioteca de entrada de dados via teclado
+// Import da biblioteca de entrada de dados via teclado
 var readline = require('readline');
 
 var entradaDeDados = readline.createInterface({
@@ -7,31 +7,44 @@ var entradaDeDados = readline.createInterface({
 });
 
 entradaDeDados.question('Digite o primeiro número: ', function (numero1) {
-    let valor1 = numero1.replace(',','.');
+    let valor1 = numero1.replace(',', '.');
 
-    entradaDeDados.question('Digite o segundo numero: ', function (numero2){
-        let valor2 = numero2.replace(',','.')
-
-        valor1 = Number(valor1)
-        valor2 = Number(valor2)
-
-        entradaDeDados.question('Escolha uma opção de calculo: [SOMAR | SUBTRAIR | MULTIPLICAR | DIVIDIR]', function (opcao){
-            let operacao = opcao.toUpperCase()
-            let resultado
+    entradaDeDados.question('Digite o segundo numero: ', function (numero2) {
+        let valor2 = numero2.replace(',', '.');
 
 
-            if(operacao == 'SOMAR'){
-                resultado = valor1 + valor2
-            }else if(operacao == 'SUBTRAIR'){
-                resultado = valor1 - valor2
-            }else if(operacao == 'MULTIPLICAR'){
-                 resultado = valor1 * valor2
-            }else if(operacao == 'DIVIDIR'){
-                resultado = valor1 / valor2
+
+        entradaDeDados.question('Escolha uma opção de calculo: [SOMAR | SUBTRAIR | MULTIPLICAR | DIVIDIR]', function (opcao) {
+            let operacao = opcao.toUpperCase();
+            let resultado;
+
+            if (valor1 === '' || valor2 === '') {
+                console.log('ERRO: É obrigatório a entrada de dados nos valores');
+            } else if (isNaN(valor1) || isNaN(valor2)) {
+                console.log('ERRO: É obrigatório a entrada somente de números');
+            } else {
+
+                valor1 = Number(valor1);
+                valor2 = Number(valor2);
+                
+                if (operacao == 'SOMAR') {
+                    resultado = valor1 + valor2;
+                } else if (operacao == 'SUBTRAIR') {
+                    resultado = valor1 - valor2;
+                } else if (operacao == 'MULTIPLICAR') {
+                    resultado = valor1 * valor2;
+                } else if (operacao == 'DIVIDIR') {
+                    resultado = valor1 / valor2;
+                } else {
+                    console.log('ERRO: Opção de cálculo inválida');
+                }
+
+                if (resultado != undefined)
+                console.log(resultado);
+
+                else
+                console.log('ERRO: É obrigatório escolher apenas as operações acimas')
             }
-
-            console.log(resultado)
-
-        })
-    })
-})
+        });
+    });
+});
